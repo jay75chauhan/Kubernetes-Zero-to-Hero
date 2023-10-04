@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pythone-sample-app
+  labels:
+    app: pythone-sample-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pythone-sample-app
+  template:
+    metadata:
+      labels:
+        app: pythone-sample-app
+    spec:
+      containers:
+        - name: pyapp
+          image: jay75chauhan/pythone-sample-app:v1
+          ports:
+            - containerPort: 8000
