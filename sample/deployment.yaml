@@ -17,5 +17,24 @@ spec:
       containers:
         - name: pyapp
           image: jay75chauhan/pythone-sample-app:v1
-          ports:
-            - containerPort: 8000
+          # in config map use mounte to get value without container re start
+          volumeMounts:
+            - name: db-connection
+              mountPath: "/opt"
+            - name: secret-volume
+              readOnly: true
+              mountPath: "/etc/secret-volume"
+          env:
+            # Define the environment variable
+            - name: DB-PORT # Notice that the case is different here                          # from the key name in the ConfigMap.
+              valueFrom:
+                configMapKeyRef:
+                  name: test-cm # The ConfigMap this value comes from.
+                  key: db-port # The key to fetch.
+      volumes:
+        - name: db-connection
+          configMap:
+            name: test-cm
+        - name: secret-volume
+          secret:
+            secretName: dotfile-secret
