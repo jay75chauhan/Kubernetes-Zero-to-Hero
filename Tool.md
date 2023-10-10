@@ -1,8 +1,12 @@
+## operator
+
+https://operatorhub.io/
+
+https://sdk.operatorframework.io/
+
 ## package manager
 
 https://helm.sh/
-
-# https://operatorhub.io/
 
 ## monitor & management
 
